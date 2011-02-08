@@ -26,19 +26,18 @@ typedef stringstream stream;
 
 double nextval(stream& ss)
 {
-	double calculate(stream& ss);
+	double calculate(stream& ss, bool);
 	double ret;
 	ss >> ret;
 	if (!ss) {
 		ss.clear();
-		if (ss.get() == '(') {
-			ret = calculate(ss);
-		} else throw runtime_error("syntax error");
+        if (ss.get() == '(') ret = calculate(ss, true);
+        else throw runtime_error("syntax error");
 	}
 	return ret;
 }
 
-double calculate(stream& ss)
+double calculate(stream& ss, bool nested= false)
 {
 	double v = nextval(ss);
 
@@ -48,7 +47,8 @@ double calculate(stream& ss)
 		char op;
 		ss >> op;
 		if (ss.eof()) break;
-		if (op == ')') return c.result();
+		if (op == ')') if (nested) return c.result();
+        else throw runtime_error("unbalanced parenthesis");
 
 		v = nextval(ss);
 
@@ -60,6 +60,7 @@ double calculate(stream& ss)
 			default:  throw runtime_error("no such operator");
 		}
 	}
+    if (nested) throw runtime_error("unbalanced parenthesis");
 	return c.result();
 }
 
