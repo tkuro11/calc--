@@ -6,15 +6,15 @@ using namespace std;
 
 class Calc { 
 	double acc;
-	double prev;		// スタックの代わり
+	double prev;		// 繧ｹ繧ｿ繝�繧ｯ縺ｮ莉｣繧上ｊ
 public:
 	Calc() {Calc(0); }
 	Calc (double init) : acc(0), prev(init) { }
 
 	double result() { return acc+prev; }
 
-	void clear() { acc = prev = 0; }          //ごわさんでー
-	void set(double v) { acc = 0; prev = v; } //ねがいましてはー
+	void clear() { acc = prev = 0; }          //縺斐ｏ縺輔ｓ縺ｧ繝ｼ
+	void set(double v) { acc = 0; prev = v; } //縺ｭ縺後＞縺ｾ縺励※縺ｯ繝ｼ
 
 	void add(double v) { acc += prev; prev = v; }
 	void sub(double v) { acc += prev; prev = -v; }
@@ -32,12 +32,11 @@ double nextval(stream& ss)
 	return ret;
 }
 
-double calculate(stringstream& ss)
+double calculate(stream& ss)
 {
-	double v;
-   
-	v = nextval(ss);
-	Calc c(v);      // 計算機登場
+	double v = nextval(ss);
+
+	Calc c(v);      // 險育ｮ玲ｩ溽匳蝣ｴ
 
 	while (!ss.eof()) {
 		char op;
