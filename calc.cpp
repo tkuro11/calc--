@@ -28,7 +28,13 @@ double nextval(stream& ss)
 {
 	double ret;
 	ss >> ret;
-	if (!ss) throw runtime_error("syntax error");
+	if (!ss) {
+		ss.clear();
+		if (ss.get() == '(') {
+			double calculate(stringstream& ss);
+			ret = calculate(ss);
+		} else throw runtime_error("syntax error");
+	}
 	return ret;
 }
 
@@ -42,6 +48,8 @@ double calculate(stream& ss)
 		char op;
 		ss >> op;
 		if (ss.eof()) break;
+		if (op == ')') return c.result();
+
 		v = nextval(ss);
 
 		switch (op) {
