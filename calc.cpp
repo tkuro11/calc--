@@ -26,12 +26,12 @@ typedef stringstream stream;
 
 double nextval(stream& ss)
 {
+	double calculate(stream& ss);
 	double ret;
 	ss >> ret;
 	if (!ss) {
 		ss.clear();
 		if (ss.get() == '(') {
-			double calculate(stringstream& ss);
 			ret = calculate(ss);
 		} else throw runtime_error("syntax error");
 	}
@@ -63,20 +63,20 @@ double calculate(stream& ss)
 	return c.result();
 }
 
-int
-main()
+int main()
 {
-
 	while (cin) { 
+		cout <<         "Expression: ";
+
 		string line;
-		cout << "Expression: ";
 		cin >> line;
+
 		if (cin) {
 			stringstream s(line);
 			try {
-				cout << "Result: "<< calculate(s) << endl;
+				cout << "    Result: "<< calculate(s) << endl;
 			} catch (runtime_error& e) {
-				cout << "!!" << e.what() << endl;
+				cout << "    Error!:" << e.what() << endl;
 			}
 		}
 	}
