@@ -70,8 +70,8 @@ int main()
 		cout <<         "Expression: ";
 
 		string line;
-		cin >> line;
-
+		cout << "Expression: ";
+        getline(cin, line);
 		if (cin) {
 			stringstream s(line);
 			try {
