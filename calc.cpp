@@ -62,7 +62,7 @@ main()
 	while (cin) { 
 		string line;
 		cout << "Expression: ";
-		cin >> line;
+        getline(cin, line);
 		if (cin) {
 			stringstream s(line);
 			try {
